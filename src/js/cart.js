@@ -25,10 +25,17 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+// Gets cart items from local storage and calculates and displays the total price, if there are items in the cart. If there are no items, the cart summary section remains hidden.
 function calculateCartTotal() {
   const cartItems = getLocalStorage('so-cart');
-  const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
-  document.querySelector('.cart-total').textContent = `Total: $${total.toFixed(2)}`;
+
+  if (cartItems?.length) {
+    document.querySelector('.cart-summary').style.display = 'block';
+
+    const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
+    document.querySelector('.cart-total').textContent =
+      `Total: $${total.toFixed(2)}`;
+  }
 }
 
 renderCartContents();
