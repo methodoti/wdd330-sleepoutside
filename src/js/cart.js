@@ -25,4 +25,11 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+function calculateCartTotal() {
+  const cartItems = getLocalStorage('so-cart');
+  const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
+  document.querySelector('.cart-total').textContent = `Total: $${total.toFixed(2)}`;
+}
+
 renderCartContents();
+calculateCartTotal();
