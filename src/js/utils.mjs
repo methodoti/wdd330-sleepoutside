@@ -28,3 +28,14 @@ export function getParam(param) {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
+
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  // If need to clear, clean the parent HTML first
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  // pass the list template, using map
+  const htmlStrings = list.map(templateFn);
+  // insert on DOM in the choosed position
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}

@@ -1,3 +1,5 @@
+import { renderListWithTemplate } from './utils.mjs';
+
 function productCardTemplate(product) {
     return `
     <li class="product-card">
@@ -18,9 +20,12 @@ export default class ProductList {
     }
     renderList(list) {
         // pass every product in the template and creat a list of HTML's
-        const htmlStrings = list.map(productCardTemplate);
+        //const htmlStrings = list.map(productCardTemplate);
         // join the HTML pieces and inject in the element (<ul>)
-        this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+        //this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+
+        // call the new universal tool passing: the template, the <ul>, and the list
+        renderListWithTemplate(productCardTemplate, this.listElement, list);
     }
 
     async init() {
