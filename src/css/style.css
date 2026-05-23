@@ -283,3 +283,10 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* Styles for the empty cart message */
+.cart-empty {
+  list-style: none;
+  padding: 1rem 0;
+  font-size: 1.1rem;
+}
