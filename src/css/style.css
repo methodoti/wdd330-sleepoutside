@@ -251,6 +251,18 @@ button {
   color: var(--discount-text);
 }
 
+.product-card__price {
+  display: inline-block;
+}
+
+.suggested__price {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--light-grey);
+  padding: 12px 0;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
