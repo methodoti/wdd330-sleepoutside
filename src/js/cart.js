@@ -1,4 +1,7 @@
 import { getLocalStorage, setLocalStorage } from './utils.mjs';
+import { loadHeaderFooter } from './utils.mjs';
+
+loadHeaderFooter();
 
 function renderCartContents() {
   // Always normalize localStorage data to an array.
@@ -9,7 +12,7 @@ function renderCartContents() {
 
   // When the cart is empty, show a friendly message and stop rendering cards.
   if (cartItems.length === 0) {
-    productList.innerHTML = "<li class='cart-empty'>Your cart is empty.</li>";
+    productList.innerHTML = '<li class=\'cart-empty\'>Your cart is empty.</li>';
     cartSummary.style.display = 'none';
     return;
   }
@@ -33,28 +36,28 @@ function renderCartContents() {
 function cartItemTemplate(item) {
   // Build one cart card for each product from localStorage.
   const newItem =
-    "<li class='cart-card divider'>" +
-    " <button type='button' class='cart-card__remove' data-id='" +
+    '<li class=\'cart-card divider\'>' +
+    ' <button type=\'button\' class=\'cart-card__remove\' data-id=\'' +
     item.Id +
-    "' aria-label='Remove item from cart'>" +
+    '\' aria-label=\'Remove item from cart\'>' +
     ' &times;</button>' +
-    "  <a href='#' class='cart-card__image'>" +
-    "    <img src='" +
+    '  <a href=\'#\' class=\'cart-card__image\'>' +
+    '    <img src=\'' +
     item.Image +
-    "' alt='" +
+    '\' alt=\'' +
     item.Name +
-    "' />" +
+    '\' />' +
     '  </a>' +
-    "  <a href='#'>" +
-    "    <h2 class='card__name'>" +
+    '  <a href=\'#\'>' +
+    '    <h2 class=\'card__name\'>' +
     item.Name +
     '</h2>' +
     '  </a>' +
-    "  <p class='cart-card__color'>" +
+    '  <p class=\'cart-card__color\'>' +
     item.Colors[0].ColorName +
     '</p>' +
-    "  <p class='cart-card__quantity'>qty: 1</p>" +
-    "  <p class='cart-card__price'>$" +
+    '  <p class=\'cart-card__quantity\'>qty: 1</p>' +
+    '  <p class=\'cart-card__price\'>$' +
     item.FinalPrice +
     '</p>' +
     '</li>';
