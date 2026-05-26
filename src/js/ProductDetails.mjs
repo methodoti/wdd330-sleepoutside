@@ -34,6 +34,18 @@ export default class ProductDetails {
 			return;
 		}
 
+		// initialize variable for the visual indicator
+		let suggestedRetailIndicator = '';
+
+		// is there discount?
+		if (this.product.FinalPrice < this.product.SuggestedRetailPrice) {
+			// get suggested price
+			const suggestedPrice = this.product.SuggestedRetailPrice;
+
+			// suggested retail price
+			suggestedRetailIndicator = `<p class="suggested__price"><del>$${this.product.SuggestedRetailPrice}</del></p>`;
+		}
+
 		document.title = `Sleep Outside | ${this.product.Name}`;
 		this.productDetail.innerHTML = `
 			<h3>${this.product.Brand?.Name ?? ''}</h3>
@@ -44,6 +56,7 @@ export default class ProductDetails {
 				alt="${this.product.NameWithoutBrand ?? this.product.Name}"
 			/>
 			<p class="product-card__price">$${this.product.FinalPrice.toFixed(2)}</p>
+			${suggestedRetailIndicator}
 			<p class="product__color">${this.product.Colors?.[0]?.ColorName ?? ''}</p>
 			<p class="product__description">${this.product.DescriptionHtmlSimple}</p>
 			<div class="product-detail__add">
