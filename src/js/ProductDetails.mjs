@@ -34,20 +34,20 @@ export default class ProductDetails {
       return;
     }
 
-		// initialize variable for the visual indicator
-		let suggestedRetailIndicator = '';
+    // initialize variable for the visual indicator
+    let suggestedRetailIndicator = '';
 
-		// is there discount?
-		if (this.product.FinalPrice < this.product.SuggestedRetailPrice) {
-			// get suggested price
-			const suggestedPrice = this.product.SuggestedRetailPrice;
+    // is there discount?
+    if (this.product.FinalPrice < this.product.SuggestedRetailPrice) {
+      // get suggested price
+      const suggestedPrice = this.product.SuggestedRetailPrice;
 
-			// suggested retail price
-			suggestedRetailIndicator = `<p class="suggested__price"><del>$${this.product.SuggestedRetailPrice}</del></p>`;
-		}
+      // suggested retail price
+      suggestedRetailIndicator = `<p class="suggested__price"><del>$${this.product.SuggestedRetailPrice}</del></p>`;
+    }
 
-		document.title = `Sleep Outside | ${this.product.Name}`;
-		this.productDetail.innerHTML = `
+    document.title = `Sleep Outside | ${this.product.Name}`;
+    this.productDetail.innerHTML = `
 			<h3>${this.product.Brand?.Name ?? ''}</h3>
 			<h2 class="divider">${this.product.NameWithoutBrand ?? this.product.Name}</h2>
 			<img
