@@ -15,11 +15,11 @@ export function setLocalStorage(key, data) {
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
+  qs(selector).addEventListener('touchend', (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener("click", callback);
+  qs(selector).addEventListener('click', callback);
 }
 
 // get query string parameter from url
@@ -29,13 +29,45 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
-export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = 'afterbegin',
+  clear = false,
+) {
   // If need to clear, clean the parent HTML first
   if (clear) {
-    parentElement.innerHTML = "";
+    parentElement.innerHTML = '';
   }
   // pass the list template, using map
   const htmlStrings = list.map(templateFn);
   // insert on DOM in the choosed position
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  // If need to clear, clean the parent HTML first
+  console.log(template);
+  parentElement.innerHTML = template;
+
+  if (callback) {
+    callback(data);
+  }
+}
+
+async function loadTemplate(path) {
+  const response = await fetch(path);
+  const template = await response.text();
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate('/partials/header.html');
+  const headerElement = document.getElementById('main-header');
+  renderWithTemplate(headerTemplate, headerElement);
+
+  const footerTemplate = await loadTemplate('/partials/footer.html');
+  const footerElement = document.getElementById('main-footer');
+  renderWithTemplate(footerTemplate, footerElement);
 }

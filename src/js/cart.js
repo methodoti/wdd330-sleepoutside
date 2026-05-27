@@ -1,4 +1,7 @@
 import { getLocalStorage, setLocalStorage } from './utils.mjs';
+import { loadHeaderFooter } from './utils.mjs';
+
+loadHeaderFooter();
 
 function renderCartContents() {
   // Always normalize localStorage data to an array.

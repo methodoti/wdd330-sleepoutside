@@ -36,24 +36,24 @@ function productCardTemplate(product) {
 }
 
 export default class ProductList {
-    constructor(category, dataSource, listElement) {
-        this.category = category;
-        this.dataSource = dataSource;
-        this.listElement = listElement;
-    }
-    renderList(list) {
-        // pass every product in the template and creat a list of HTML's
-        //const htmlStrings = list.map(productCardTemplate);
-        // join the HTML pieces and inject in the element (<ul>)
-        //this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+  constructor(category, dataSource, listElement) {
+    this.category = category;
+    this.dataSource = dataSource;
+    this.listElement = listElement;
+  }
+  renderList(list) {
+    // pass every product in the template and creat a list of HTML's
+    //const htmlStrings = list.map(productCardTemplate);
+    // join the HTML pieces and inject in the element (<ul>)
+    //this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
 
-        // call the new universal tool passing: the template, the <ul>, and the list
-        renderListWithTemplate(productCardTemplate, this.listElement, list);
-    }
+    // call the new universal tool passing: the template, the <ul>, and the list
+    renderListWithTemplate(productCardTemplate, this.listElement, list);
+  }
 
-    async init() {
-        const list = await this.dataSource.getData();
-        // call renderList passing the list
-        this.renderList(list);
-    }
+  async init() {
+    const list = await this.dataSource.getData();
+    // call renderList passing the list
+    this.renderList(list);
+  }
 }
