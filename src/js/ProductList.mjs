@@ -3,17 +3,23 @@ import { renderListWithTemplate } from './utils.mjs';
 function productCardTemplate(product) {
   // initialize variable for the visual indicator
   let discountIndicator = '';
+  let suggestedRetailIndicator = '';
 
   // is there discount?
   if (product.FinalPrice < product.SuggestedRetailPrice) {
     // flag as discounted with %
     const discountAmount = product.SuggestedRetailPrice - product.FinalPrice;
+    // const discountPercentage = Math.round((discountAmount / product.SuggestedRetailPrice) * 100);
+    const suggestedPrice = product.SuggestedRetailPrice;
     const discountPercentage = Math.round(
-      (discountAmount / product.SuggestedRetailPrice) * 100,
+      (discountAmount / suggestedPrice) * 100,
     );
 
     // html with the flag
     discountIndicator = `<p class="discount-badge">Save ${discountPercentage}%</p>`;
+
+    // suggested retail price
+    suggestedRetailIndicator = `<p class="suggested__price"><del>$${product.SuggestedRetailPrice}</del></p>`;
   }
 
   return `
@@ -24,7 +30,7 @@ function productCardTemplate(product) {
         <h3 class="card__brand">${product.Brand.Name}</h3>
         <h2 class="card__name">${product.NameWithoutBrand}</h2>
         <p class="product-card__price">$${product.FinalPrice}</p>
-        <p class="suggested__price"><del>$${product.SuggestedRetailPrice}</del></p>
+        ${suggestedRetailIndicator}
         </a>
     </li>`;
 }
