@@ -48,7 +48,6 @@ export function renderListWithTemplate(
 
 export function renderWithTemplate(template, parentElement, data, callback) {
   // If need to clear, clean the parent HTML first
-  console.log(template);
   parentElement.innerHTML = template;
 
   if (callback) {

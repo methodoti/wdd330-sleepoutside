@@ -36,11 +36,21 @@ export default class ProductDetails {
 
     // initialize variable for the visual indicator
     let suggestedRetailIndicator = '';
+    let discountIndicator = '';
 
     // is there discount?
     if (this.product.FinalPrice < this.product.SuggestedRetailPrice) {
       // get suggested price
       const suggestedPrice = this.product.SuggestedRetailPrice;
+      // calculate the discount amount
+      const discountAmount = suggestedPrice - this.product.FinalPrice;
+      // calculate the percentage for the flag
+      const discountPercentage = Math.round(
+        (discountAmount / suggestedPrice) * 100,
+      );
+
+      // html with the flag
+      discountIndicator = `<p class="discount-badge">Save ${discountPercentage}%</p>`;
 
       // suggested retail price
       suggestedRetailIndicator = `<p class="suggested__price"><del>$${this.product.SuggestedRetailPrice}</del></p>`;
@@ -55,6 +65,7 @@ export default class ProductDetails {
 				src="${this.product.Image}"
 				alt="${this.product.NameWithoutBrand ?? this.product.Name}"
 			/>
+      ${discountIndicator}
 			<p class="product-card__price">$${this.product.FinalPrice.toFixed(2)}</p>
 			${suggestedRetailIndicator}
 			<p class="product__color">${this.product.Colors?.[0]?.ColorName ?? ''}</p>
