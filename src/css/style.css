@@ -72,6 +72,27 @@ p {
   background-color: white;
 }
 
+.category {
+  display: flex;
+  flex-wrap: wrap row;
+  gap: 100px;
+  margin: 2rem;
+  justify-content: center;
+  align-content: space-evenly;
+}
+
+.category a {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  font-weight: bold;
+}
+
+.category-img {
+  height: 75px;
+  width: auto;
+}
+
 .logo--square {
   font-size: var(--small-font);
   width: 110px;

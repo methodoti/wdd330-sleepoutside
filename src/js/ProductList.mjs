@@ -24,9 +24,9 @@ function productCardTemplate(product) {
 
   return `
     <li class="product-card">
-        <a href="product_pages/?product=${product.Id}">
+        <a href="/product_pages/index.html?product=${product.Id}">
         ${discountIndicator}
-        <img src="${product.Image} " alt="${product.Name} " />
+        <img src="${product.Images.PrimaryMedium}" alt="${product.Name}" />
         <h3 class="card__brand">${product.Brand.Name}</h3>
         <h2 class="card__name">${product.NameWithoutBrand}</h2>
         <p class="product-card__price">$${product.FinalPrice}</p>
@@ -52,8 +52,13 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+    // const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     // call renderList passing the list
     this.renderList(list);
+
+    // Update the H2 dinamicaly
+    document.querySelector('.products h2').innerHTML =
+      `Top Products: ${this.category}`;
   }
 }
