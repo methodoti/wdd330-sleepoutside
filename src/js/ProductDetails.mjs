@@ -19,7 +19,23 @@ export default class ProductDetails {
     if (cartItems === null) {
       cartItems = [];
     }
-    cartItems.push(product);
+
+    // If the product already exists, increase quantity instead of adding duplicates.
+    const productIndex = cartItems.findIndex((item) => item.Id === product.Id);
+    if (productIndex >= 0) {
+      // Backward compatibility: old items may not have Quantity yet.
+      const currentQuantity = Number(cartItems[productIndex].Quantity);
+      const safeQuantity =
+        Number.isFinite(currentQuantity) && currentQuantity > 0
+          ? Math.floor(currentQuantity)
+          : 1;
+
+      // Increment quantity when the product is already in the cart.
+      cartItems[productIndex].Quantity = safeQuantity + 1;
+    } else {
+      // New entries start with a single unit selected.
+      cartItems.push({ ...product, Quantity: 1 });
+    }
 
     setLocalStorage('so-cart', cartItems);
   }
