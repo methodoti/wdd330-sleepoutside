@@ -176,6 +176,9 @@ button {
 .products {
   margin-top: 2rem;
   padding: 1rem;
+  h2 {
+    text-transform: capitalize;
+  }
 }
 
 .product-list {
@@ -392,4 +395,8 @@ footer {
   list-style: none;
   padding: 1rem 0;
   font-size: 1.1rem;
+}
+
+.alert-list {
+  text-align: center;
 }
