@@ -59,6 +59,6 @@ export default class ProductList {
 
     // Update the H2 dinamicaly
     document.querySelector('.products h2').innerHTML =
-      `Top Products: ${this.category}`;
+      `Top Products: ${this.category}`.replace('-', ' ');
   }
 }

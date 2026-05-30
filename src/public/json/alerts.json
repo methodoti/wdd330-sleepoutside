@@ -1,0 +1,12 @@
+[
+  {
+    "message": "Testing... testing... 1, 2, 3...",
+    "background": "darkblue",
+    "color": "white"
+  },
+  {
+    "message": "I'm also a test alert!",
+    "background": "darkgreen",
+    "color": "white"
+  }
+]

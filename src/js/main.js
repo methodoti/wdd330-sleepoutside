@@ -1,6 +1,13 @@
 // import ProductData from './ProductData.mjs';
 // import ProductList from './ProductList.mjs';
 import { loadHeaderFooter } from './utils.mjs';
+import Alert from './Alert.js';
+
+// create the alert system
+const alerts = new Alert();
+
+// initialize the alert system
+alerts.init();
 
 // // create the data source (JSON connectio)
 // const dataSource = new ProductData('tents');

@@ -81,7 +81,7 @@ function handleCartInteraction(event) {
 function cartItemTemplate(item) {
   // Build one cart card for each product from localStorage.
   const newItem = `<li class="cart-card divider">
-      <a href="/product_pages/?product=${item.Id}" class="cart-card__image"><img src="${item.Image}" alt="${item.Name}" /></a>
+      <a href="/product_pages/?product=${item.Id}" class="cart-card__image"><img src="${item.Images.PrimaryMedium}" alt="${item.Name}" /></a>
       <a href="/product_pages/?product=${item.Id}"><h2 class="card__name">${item.Name}</h2></a>
       <p class="cart-card__color">${item.Colors?.[0]?.ColorName ?? ''}</p>
       <div class="cart-card__controls" aria-label="Quantity controls for ${item.Name}">
