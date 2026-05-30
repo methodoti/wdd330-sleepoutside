@@ -155,6 +155,9 @@ button {
 .products {
   margin-top: 2rem;
   padding: 1rem;
+  h2 {
+    text-transform: capitalize;
+  }
 }
 
 .product-list {
@@ -303,4 +306,38 @@ footer {
   list-style: none;
   padding: 1rem 0;
   font-size: 1.1rem;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  padding: 1rem;
+  padding-top: 3rem;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  figure {
+    margin: 0;
+    width: 120px;
+    text-align: center;
+  }
+
+  img {
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+    display: block;
+  }
+
+  figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+  }
 }

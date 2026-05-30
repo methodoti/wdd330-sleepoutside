@@ -55,5 +55,11 @@ export default class ProductList {
     const list = await this.dataSource.getData(this.category);
     // call renderList passing the list
     this.renderList(list);
+
+    const topProductsEdit = document.querySelector('.products h2');
+    topProductsEdit.innerHTML = `Top Products: ${this.category}`.replace(
+      '-',
+      ' ',
+    );
   }
 }
