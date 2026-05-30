@@ -61,10 +61,33 @@ async function loadTemplate(path) {
   return template;
 }
 
+export function getCartItemCount(key = 'so-cart') {
+  const cartItems = getLocalStorage(key) || [];
+
+  return cartItems.reduce((total, item) => {
+    const quantity = Number(item?.Quantity);
+    const safeQuantity =
+      Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
+    return total + safeQuantity;
+  }, 0);
+}
+
+export function updateCartCountBadge() {
+  const badgeElement = document.querySelector('.cart-count');
+  if (!badgeElement) {
+    return;
+  }
+
+  const itemCount = getCartItemCount();
+  badgeElement.textContent = itemCount;
+  badgeElement.classList.toggle('is-hidden', itemCount === 0);
+}
+
 export async function loadHeaderFooter() {
   const headerTemplate = await loadTemplate('/partials/header.html');
   const headerElement = document.getElementById('main-header');
   renderWithTemplate(headerTemplate, headerElement);
+  updateCartCountBadge();
 
   const footerTemplate = await loadTemplate('/partials/footer.html');
   const footerElement = document.getElementById('main-footer');
