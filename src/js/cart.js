@@ -1,5 +1,5 @@
 import { getLocalStorage, setLocalStorage } from './utils.mjs';
-import { loadHeaderFooter } from './utils.mjs';
+import { loadHeaderFooter, updateCartCountBadge } from './utils.mjs';
 
 loadHeaderFooter();
 
@@ -106,6 +106,7 @@ function removeItemFromCart(productId) {
   // Re-render the cart contents and total after removal.
   renderCartContents();
   calculateCartTotal();
+  updateCartCountBadge();
 }
 
 function updateItemQuantity(productId, quantity) {
@@ -118,6 +119,7 @@ function updateItemQuantity(productId, quantity) {
   saveCartItems(updatedCart);
   renderCartContents();
   calculateCartTotal();
+  updateCartCountBadge();
 }
 
 // Gets cart items from local storage and calculates and displays the total price, if there are items in the cart. If there are no items, the cart summary section remains hidden.
