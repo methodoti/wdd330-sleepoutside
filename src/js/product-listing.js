@@ -1,9 +1,9 @@
-import ProductData from './ProductData.mjs';
+import ExternalServices from './ExternalServices.mjs';
 import ProductList from './ProductList.mjs';
 import { loadHeaderFooter, getParam } from './utils.mjs';
 
 // // create the data source (JSON connectio)
-// const dataSource = new ProductData('tents');
+// const dataSource = new ExternalServices('tents');
 // // render the product list (output target)
 // const listElement = document.querySelector('.product-list');
 // // new instance of ProductList
@@ -16,8 +16,8 @@ import { loadHeaderFooter, getParam } from './utils.mjs';
 loadHeaderFooter();
 
 const category = getParam('category');
-// first create an instance of the ProductData class.
-const dataSource = new ProductData();
+// first create an instance of the ExternalServices class.
+const dataSource = new ExternalServices();
 // then get the element you want the product list to render in
 const listElement = document.querySelector('.product-list');
 // then create an instance of the ProductList class and send it the correct information.

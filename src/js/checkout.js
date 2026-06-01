@@ -5,5 +5,12 @@ import CheckoutProcess from './CheckoutProcess.mjs';
 loadHeaderFooter();
 
 // Create an instance of the CheckoutProcess class with the cart data and initialize it to calculate and display the order summary.
-const checkoutProcess = new CheckoutProcess(getLocalStorage('so-cart'));
-checkoutProcess.init();
+const newOrder = new CheckoutProcess(getLocalStorage('so-cart'));
+newOrder.init();
+
+document.querySelector('#placeOrder').addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const form = document.forms['checkout-form'];
+    newOrder.checkout(form);
+});
