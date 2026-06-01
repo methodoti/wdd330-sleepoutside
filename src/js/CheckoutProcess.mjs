@@ -47,10 +47,7 @@ export default class CheckoutProcess {
     shippingChargeElement.textContent = `Shipping: $${this.shippingCharge.toFixed(2)}`;
 
     // Calculate the order total by summing the subtotal, tax charge, and shipping charge.
-    this.finalOrderTotal =
-      this.subtotal +
-      this.taxCharge +
-      this.shippingCharge;
+    this.finalOrderTotal = this.subtotal + this.taxCharge + this.shippingCharge;
     // Select the element with the class 'orderTotal' and update its text content to display the calculated order total.
     const orderTotalElement = document.querySelector('.orderTotal');
     orderTotalElement.textContent = `Order Total: $${this.finalOrderTotal.toFixed(2)}`;
@@ -113,7 +110,7 @@ function formDataToJSON(formElement) {
   const convertedJSON = {};
 
   // Iterate through each key-value pair in the FormData object and add it to the JSON object.
-  formData.forEach (function (value, key) {
+  formData.forEach(function (value, key) {
     convertedJSON[key] = value;
   });
   // Return the converted JSON object.

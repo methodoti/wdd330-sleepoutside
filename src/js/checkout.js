@@ -9,8 +9,8 @@ const newOrder = new CheckoutProcess(getLocalStorage('so-cart'));
 newOrder.init();
 
 document.querySelector('#placeOrder').addEventListener('click', (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    const form = document.forms['checkout-form'];
-    newOrder.checkout(form);
+  const form = document.forms['checkout-form'];
+  newOrder.checkout(form);
 });
