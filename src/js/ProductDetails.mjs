@@ -15,6 +15,16 @@ export default class ProductDetails {
   addToCart() {
     if (this.product?.Id) {
       this.addProductToCart(this.product);
+
+      // Animate the cart when adding product items
+      // find the cart SVG in the DOM
+      let cartAnimation = document.querySelector('.cart__link svg');
+      // add the animation class to it
+      cartAnimation.classList.add('cart-animation');
+      // Remove the class after 300ms, matching the 0.3s duration in the CSS
+      setTimeout(() => {
+        cartAnimation.classList.remove('cart-animation');
+      }, 300);
     }
   }
 
