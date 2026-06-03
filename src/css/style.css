@@ -154,6 +154,28 @@ button {
   width: 25px;
 }
 
+.cart-animation {
+  animation: littleJump 0.3s ease-in-out;
+}
+
+@keyframes littleJump {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  /* up: 5px, grow 20%, spin 20 degrees to the right */
+  33% {
+    transform: translateY(-5px) scale(1.2) rotate(20deg);
+  }
+  /* maintain position and size and spin 20 degrees to the left */
+  66% {
+    transform: translateY(-5px) scale(1.2) rotate(-20deg);
+  }
+  /* shrink to original position, size and orientation */
+  100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
 .cart-count {
   position: absolute;
   top: -0.45rem;
