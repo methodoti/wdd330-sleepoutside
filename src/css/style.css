@@ -426,3 +426,28 @@ footer {
 .alert-list {
   text-align: center;
 }
+
+/* Checkout form styles */
+.checkout-form {
+  max-width: 800px;
+  margin: 1.25rem auto;
+
+  fieldset {
+    margin: 1rem;
+    padding: 1rem;
+
+    legend {
+      font-weight: 700;
+      padding: 0.25rem;
+    }
+
+    label {
+      display: block;
+      margin: 0.35rem 0 0.15rem 0;
+    }
+
+    input {
+      width: 100%;
+    }
+  }
+}

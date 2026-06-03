@@ -8,7 +8,9 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <script src="../js/checkout.js" type="module"></script>
   </head>
 
   <body>
@@ -17,6 +19,61 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+
+        <form class="checkout-form" name="checkout-form">
+          <input type="hidden" name="orderDate" id="orderDate" />
+
+          <fieldset>
+            <legend>Customer Information</legend>
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="fname" required />
+
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname" required />
+
+            <label for="street">Street Address:</label>
+            <input type="text" id="street" name="street" required />
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required />
+
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required />
+
+            <label for="zip">Zip Code:</label>
+            <input type="text" id="zip" name="zip" required />
+          </fieldset>
+
+          <fieldset>
+            <legend>Payment Information</legend>
+            <label for="cardNumber">Credit Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" required />
+
+            <label for="expiration">Expiration Date:</label>
+            <input
+              type="text"
+              id="expiration"
+              name="expiration"
+              placeholder="MM/YY"
+              required
+            />
+
+            <label for="code">Security Code (CVV):</label>
+            <input type="text" id="code" name="code" required />
+          </fieldset>
+
+          <fieldset>
+            <legend>Order Summary</legend>
+            <div class="order-summary">
+              <p class="subtotal">Subtotal: $0.00</p>
+              <p class="tax">Tax: $0.00</p>
+              <p class="shipping">Shipping Estimate: $0.00</p>
+              <p class="orderTotal">Order Total: $0.00</p>
+            </div>
+          </fieldset>
+
+          <button type="submit" id="placeOrder">Place Order</button>
+        </form>
       </section>
     </main>
 
