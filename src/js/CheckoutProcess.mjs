@@ -1,4 +1,37 @@
 import ExternalServices from './ExternalServices.mjs';
+import { setLocalStorage } from './utils.mjs';
+
+// Create an instance of the ExternalServices class so that we have access to its methods.
+const externalServices = new ExternalServices();
+
+// A function that takes the cart items and creates, and returns, a new array with only the parts needed (Id, Name, FinalPrice, Quantity) for the checkout process.
+function packageItems(items) {
+  // Iterate through the cart items and create a new array that only includes the Id, Name, FinalPrice, and Quantity for each item.
+  const packagedItems = items.map((item) => {
+    return {
+      Id: item.Id,
+      Name: item.Name,
+      FinalPrice: item.FinalPrice,
+      Quantity: item.Quantity,
+    };
+  });
+  // Return the new array.
+  return packagedItems;
+}
+
+// A function that converts form data from a given form element into JSON.
+function formDataToJSON(formElement) {
+  // Create a new FormData object and JSON object to hold the converted data.
+  const formData = new FormData(formElement);
+  const convertedJSON = {};
+
+  // Iterate through each key-value pair in the FormData object and add it to the JSON object.
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
+  // Return the converted JSON object.
+  return convertedJSON;
+}
 
 export default class CheckoutProcess {
   constructor(cartData) {
@@ -65,10 +98,16 @@ export default class CheckoutProcess {
     orderObject.shipping = this.shippingCharge;
     orderObject.items = packageItems(this.cartData);
 
-    // Create an instance of the ExternalServices class and call the checkout method, passing in the order object.
-    const externalServices = new ExternalServices();
-    const response = await externalServices.checkout(orderObject);
-    console.log(response);
+    // Use the checkout method from externalServices to send the order data to the server. Log the response if successful and clear out the cart data. Log an error message if there is an error.
+    try {
+      const response = await externalServices.checkout(orderObject);
+      console.log(response);
+      // Clear the cart data from local storage since the order has been processed and redirect the user to the success page.
+      setLocalStorage('so-cart', []);
+      location.replace('/checkout/success.html');
+    } catch (err) {
+      console.error('An error occurred while processing checkout:', err);
+    }
   }
 
   // Runs the checkout process by calculating and displaying the subtotal, and setting up an event listener on the zip code input field to calculate and display the tax, shipping, and finalorder total when a valid zip code is entered.
@@ -86,33 +125,4 @@ export default class CheckoutProcess {
       });
     }
   }
-}
-
-// A function that takes the cart items and creates, and returns, a new array with only the parts needed (Id, Name, FinalPrice, Quantity) for the checkout process.
-function packageItems(items) {
-  // Iterate through the cart items and create a new array that only includes the Id, Name, FinalPrice, and Quantity for each item.
-  const packagedItems = items.map((item) => {
-    return {
-      Id: item.Id,
-      Name: item.Name,
-      FinalPrice: item.FinalPrice,
-      Quantity: item.Quantity,
-    };
-  });
-  // Return the new array.
-  return packagedItems;
-}
-
-// A function that converts form data from a given form element into JSON.
-function formDataToJSON(formElement) {
-  // Create a new FormData object and JSON object to hold the converted data.
-  const formData = new FormData(formElement);
-  const convertedJSON = {};
-
-  // Iterate through each key-value pair in the FormData object and add it to the JSON object.
-  formData.forEach(function (value, key) {
-    convertedJSON[key] = value;
-  });
-  // Return the converted JSON object.
-  return convertedJSON;
 }
