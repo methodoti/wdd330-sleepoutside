@@ -1,4 +1,5 @@
 import ExternalServices from './ExternalServices.mjs';
+import { alertMessage } from './utils.mjs';
 
 export default class CheckoutProcess {
   constructor(cartData) {
@@ -67,8 +68,28 @@ export default class CheckoutProcess {
 
     // Create an instance of the ExternalServices class and call the checkout method, passing in the order object.
     const externalServices = new ExternalServices();
-    const response = await externalServices.checkout(orderObject);
-    console.log(response);
+    // call the checkout method
+    try {
+      const response = await externalServices.checkout(orderObject);
+      // clear out the cart contents in localStorage
+      localStorage.removeItem('so-cart');
+      // redirect the user to the success page
+      window.location.href = 'success.html';
+
+      // if not possible, log the caught error to the console
+    } catch (error) {
+      // console.log("Error caught:", error.message); // just a test to see the error.message object
+      // clear existing alerts from the DOM
+      const existingAlerts = document.querySelectorAll('.alert');
+      existingAlerts.forEach((alert) => alert.remove());
+
+      // Extract error messages from the object
+      const errorMessages = Object.values(error.message);
+      // Iterate through error messages and call the alertMessage function on each error.
+      errorMessages.forEach((msg) => {
+        alertMessage(msg);
+      });
+    }
   }
 
   // Runs the checkout process by calculating and displaying the subtotal, and setting up an event listener on the zip code input field to calculate and display the tax, shipping, and finalorder total when a valid zip code is entered.

@@ -9,8 +9,15 @@ const newOrder = new CheckoutProcess(getLocalStorage('so-cart'));
 newOrder.init();
 
 document.querySelector('#placeOrder').addEventListener('click', (event) => {
+  // prevent default HTML form submission behavior
   event.preventDefault();
 
   const form = document.forms['checkout-form'];
-  newOrder.checkout(form);
+  if (form.checkValidity()) {
+    // Form is valid, proceed to checkout
+    newOrder.checkout(form);
+  } else {
+    // Form is not valid, display browser alert bubbles
+    form.reportValidity();
+  }
 });
