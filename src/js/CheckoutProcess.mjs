@@ -67,8 +67,14 @@ export default class CheckoutProcess {
 
     // Create an instance of the ExternalServices class and call the checkout method, passing in the order object.
     const externalServices = new ExternalServices();
-    const response = await externalServices.checkout(orderObject);
-    console.log(response);
+    // call the checkout method
+    try {
+      const response = await externalServices.checkout(orderObject);
+      console.log(response);
+      // if not possible, log the caught error to the console
+    } catch (error) {
+      console.error(`Error caught: ${error}`);
+    }
   }
 
   // Runs the checkout process by calculating and displaying the subtotal, and setting up an event listener on the zip code input field to calculate and display the tax, shipping, and finalorder total when a valid zip code is entered.
