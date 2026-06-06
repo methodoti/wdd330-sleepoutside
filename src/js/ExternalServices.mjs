@@ -3,7 +3,7 @@ const baseURL = import.meta.env.VITE_SERVER_URL;
 async function convertToJson(res) {
   // Extract and wait for the response body converted in JS object
   const data = await res.json();
-  console.log(data);
+  // console.log(data);
 
   if (res.ok) {
     // if the res object is ok: return the data object
