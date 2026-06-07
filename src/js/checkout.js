@@ -12,5 +12,12 @@ document.querySelector('#placeOrder').addEventListener('click', (event) => {
   event.preventDefault();
 
   const form = document.forms['checkout-form'];
+  const isValid = form.checkValidity();
+  form.reportValidity();
+
+  if (!isValid) {
+    return;
+  }
+
   newOrder.checkout(form);
 });

@@ -1,4 +1,9 @@
 import ExternalServices from './ExternalServices.mjs';
+import {
+  alertMessage,
+  setLocalStorage,
+  updateCartCountBadge,
+} from './utils.mjs';
 
 export default class CheckoutProcess {
   constructor(cartData) {
@@ -55,6 +60,10 @@ export default class CheckoutProcess {
 
   // Process an order from the form data and cart data, then send it to the server.
   async checkout(form) {
+    if (this.finalOrderTotal === 0) {
+      this.calculateTaxShippingAndTotalAndDisplay();
+    }
+
     // Convert the form data into a JSON object using the formDataToJSON function.
     const orderObject = formDataToJSON(form);
 
@@ -67,8 +76,15 @@ export default class CheckoutProcess {
 
     // Create an instance of the ExternalServices class and call the checkout method, passing in the order object.
     const externalServices = new ExternalServices();
-    const response = await externalServices.checkout(orderObject);
-    console.log(response);
+
+    try {
+      await externalServices.checkout(orderObject);
+      setLocalStorage('so-cart', []);
+      updateCartCountBadge();
+      window.location.href = '/checkout/success.html';
+    } catch (err) {
+      alertMessage(getErrorMessage(err));
+    }
   }
 
   // Runs the checkout process by calculating and displaying the subtotal, and setting up an event listener on the zip code input field to calculate and display the tax, shipping, and finalorder total when a valid zip code is entered.
@@ -86,6 +102,33 @@ export default class CheckoutProcess {
       });
     }
   }
+}
+
+function getErrorMessage(err) {
+  const serverMessage = err?.message;
+
+  if (typeof serverMessage === 'string' && serverMessage.trim().length > 0) {
+    return serverMessage;
+  }
+
+  if (serverMessage && typeof serverMessage === 'object') {
+    if (
+      typeof serverMessage.message === 'string' &&
+      serverMessage.message.trim().length > 0
+    ) {
+      return serverMessage.message;
+    }
+
+    const values = Object.values(serverMessage)
+      .flat()
+      .filter((value) => typeof value === 'string' && value.trim().length > 0);
+
+    if (values.length > 0) {
+      return values.join(' ');
+    }
+  }
+
+  return 'We could not place your order. Please verify your information and try again.';
 }
 
 // A function that takes the cart items and creates, and returns, a new array with only the parts needed (Id, Name, FinalPrice, Quantity) for the checkout process.
