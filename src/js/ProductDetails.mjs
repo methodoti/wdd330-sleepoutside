@@ -1,4 +1,5 @@
 import {
+  alertMessage,
   setLocalStorage,
   getLocalStorage,
   updateCartCountBadge,
@@ -25,6 +26,8 @@ export default class ProductDetails {
       setTimeout(() => {
         cartAnimation.classList.remove('cart-animation');
       }, 300);
+
+      alertMessage('Item added to cart.', false);
     }
   }
 
